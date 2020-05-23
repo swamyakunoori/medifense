@@ -32,7 +32,7 @@
                                                     My Profile
                                                 </a>
                                             </li>
-                                            <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>
+                                            <li><a href="<?php echo base_url(); ?>company/logout"><span class="edu-icon edu-locked author-log-ic"></span>
                                                     Log Out
                                                 </a>
                                             </li>

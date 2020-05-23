@@ -4,9 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Company extends CI_Controller {
 
 	public function index($page = 'dashboard'){
-		if(! file_exists('application/views/ca/'.$page.'.php')) {
-			show_404();
-                }
+                
+        if(!$this->session->userdata('sessioncompany')){
+                redirect('0/clogin');
+        }
+        
+        if(! file_exists('application/views/ca/'.$page.'.php')) {
+		show_404();
+        }
+
         $data['breadcometitle'] = $page;
         $data['title'] = "Company Admin";
         $this->load->view('ca/top');
@@ -17,7 +23,12 @@ class Company extends CI_Controller {
         $this->load->view('ca/'.$page);
         $this->load->view('ca/footer');
         $this->load->view('ca/bottom');
-	}
+        }
+        
+        function logout(){
+                $this->session->unset_userdata('sessioncompany');
+                redirect('0/clogin');
+        }
 	
 }
 ?>

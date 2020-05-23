@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.9.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 19, 2020 at 11:27 AM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 7.2.5
+-- Host: localhost:3306
+-- Generation Time: May 23, 2020 at 06:31 PM
+-- Server version: 10.3.23-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `medifense`
+-- Database: `vitasoft_medifense`
 --
 
 -- --------------------------------------------------------
@@ -39,7 +39,7 @@ CREATE TABLE `companies` (
   `cMobile` varchar(15) NOT NULL,
   `cStatus` int(11) NOT NULL,
   `createdAt` datetime NOT NULL,
-  `modifiedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `modifiedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -47,8 +47,8 @@ CREATE TABLE `companies` (
 --
 
 INSERT INTO `companies` (`cId`, `hId`, `cUsername`, `cPassword`, `cName`, `cAddress`, `cNoEmp`, `cMobile`, `cStatus`, `createdAt`, `modifiedAt`) VALUES
-(2, 8, 'MEDIC1', '8974563211', 'VITA', 'Karimnagar', 5, '8974563211', 1, '2020-05-15 18:10:14', '2020-05-18 16:38:40'),
-(3, 8, 'MEDIC2', '8976541235', 'Coign', 'Tarnaka', 20, '8976541235', 0, '2020-05-16 09:40:32', '2020-05-19 05:06:59');
+(2, 8, 'MEDIC1', '8974563211', 'VITA', 'KNR', 5, '8974563211', 1, '2020-05-15 18:10:14', '2020-05-16 09:52:38'),
+(3, 9, 'MEDIC2', '8976541235', 'Coign', 'Tarnaka', 20, '8976541235', 1, '2020-05-16 09:40:32', '2020-05-22 07:38:42');
 
 -- --------------------------------------------------------
 
@@ -60,9 +60,9 @@ CREATE TABLE `dailyquetions` (
   `qId` int(11) NOT NULL,
   `qName` varchar(200) NOT NULL,
   `qAnswer` varchar(100) NOT NULL,
-  `qStatus` int(11) NOT NULL DEFAULT '0',
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifiedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `qStatus` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `modifiedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -70,10 +70,9 @@ CREATE TABLE `dailyquetions` (
 --
 
 INSERT INTO `dailyquetions` (`qId`, `qName`, `qAnswer`, `qStatus`, `createdAt`, `modifiedAt`) VALUES
-(1, 'How Are you feeling today', 'Healthy@Not Well', 1, '2020-05-19 09:25:12', '2020-05-19 09:25:12'),
-(2, 'How you been Eposed to Someone with confirmed covid-19 infection', 'Yes@No', 1, '2020-05-19 09:25:29', '2020-05-19 09:25:29'),
-(3, 'Do you hav any Health conditions apply to you', 'Fever@Soar Throat@Mild Cough@Runny Nose@Mild Fatigue@No symptoms', 1, '2020-05-19 09:25:15', '2020-05-19 09:25:15'),
-(4, 'Going to Work', 'Yes', 1, '2020-05-19 09:25:34', '2020-05-19 09:25:34');
+(1, 'How Are you feeling today', 'Healthy@Not Well', 1, '2020-05-18 05:32:43', '2020-05-18 05:32:43'),
+(2, 'How you been Eposed to Someone with confirmed covid-19 infection', 'Yes@No', 1, '2020-05-18 05:32:56', '2020-05-18 05:32:56'),
+(3, 'Do you hav any Health conditions apply to you', 'Fever@Soar Throat@Mild Cough@Runny Nose@Mild Fatigue@No symptoms', 1, '2020-05-18 05:33:50', '2020-05-18 05:33:50');
 
 -- --------------------------------------------------------
 
@@ -86,8 +85,8 @@ CREATE TABLE `dailyreport` (
   `eId` int(11) NOT NULL,
   `qId` int(11) NOT NULL,
   `qAnswer` varchar(200) NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifiedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `modifiedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -95,15 +94,14 @@ CREATE TABLE `dailyreport` (
 --
 
 INSERT INTO `dailyreport` (`rId`, `eId`, `qId`, `qAnswer`, `createdAt`, `modifiedAt`) VALUES
-(5, 3, 2, 'No', '2020-05-16 12:57:25', '2020-05-16 12:57:25'),
-(6, 3, 2, 'No', '2020-05-15 12:58:10', '2020-05-16 14:06:08'),
-(7, 3, 2, 'No', '2020-05-14 12:59:49', '2020-05-16 14:06:19'),
-(8, 3, 5, 'No', '2020-05-16 13:25:31', '2020-05-16 13:25:31'),
-(9, 3, 6, 'No', '2020-05-16 13:26:10', '2020-05-16 13:26:10'),
-(10, 3, 7, 'No', '2020-05-16 13:27:56', '2020-05-16 13:27:56'),
-(11, 3, 7, 'No', '2020-05-15 13:28:48', '2020-05-16 14:06:59'),
-(12, 3, 7, 'No', '2020-05-14 13:30:53', '2020-05-16 14:07:07'),
-(13, 3, 5, 'Yes', '2020-05-15 13:30:53', '2020-05-16 14:06:38');
+(26, 3, 3, 'Yes', '2020-05-22 07:01:51', '2020-05-22 07:01:51'),
+(27, 3, 2, 'No', '2020-05-22 07:01:51', '2020-05-22 07:01:51'),
+(28, 4, 1, 'Healthy', '2020-05-22 07:53:10', '2020-05-22 07:53:10'),
+(29, 4, 2, 'No', '2020-05-22 07:53:10', '2020-05-22 07:53:10'),
+(30, 4, 3, 'Fever@Mild Cough@Runny Nose', '2020-05-22 07:53:10', '2020-05-22 07:53:10'),
+(31, 4, 1, 'Healthy', '2020-05-23 07:48:55', '2020-05-23 07:48:55'),
+(32, 4, 2, 'Yes', '2020-05-23 07:48:55', '2020-05-23 07:48:55'),
+(33, 4, 3, 'Soar Throat@Mild Cough', '2020-05-23 07:48:55', '2020-05-23 07:48:55');
 
 -- --------------------------------------------------------
 
@@ -122,9 +120,17 @@ CREATE TABLE `empfamily` (
   `efDisease` varchar(50) NOT NULL,
   `efMedicines` varchar(50) NOT NULL,
   `efHealthCondition` varchar(20) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `modifiedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `modifiedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `empfamily`
+--
+
+INSERT INTO `empfamily` (`efId`, `eId`, `efName`, `efRelation`, `efAge`, `efGender`, `efCoronaStatus`, `efDisease`, `efMedicines`, `efHealthCondition`, `createdAt`, `modifiedAt`) VALUES
+(1, 3, 'joy', 'Relation', 5, 'Male', '-Ve', 'Yes', 'Yes', 'Good', '0000-00-00 00:00:00', '2020-05-20 06:51:45'),
+(5, 7, '', '', 0, '', '-ve', 'Other', '', 'No', '2020-05-23 08:55:59', '2020-05-23 08:55:59');
 
 -- --------------------------------------------------------
 
@@ -135,6 +141,7 @@ CREATE TABLE `empfamily` (
 CREATE TABLE `empinfo` (
   `eiId` int(11) NOT NULL,
   `eId` int(11) NOT NULL,
+  `eImage` varchar(100) NOT NULL,
   `eAddress` varchar(100) NOT NULL,
   `eAge` int(11) NOT NULL,
   `eGender` varchar(10) NOT NULL,
@@ -148,16 +155,18 @@ CREATE TABLE `empinfo` (
   `eSmoking` varchar(10) NOT NULL,
   `eDrinking` varchar(10) NOT NULL,
   `ePregnant` varchar(10) NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifiedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `modifiedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `empinfo`
 --
 
-INSERT INTO `empinfo` (`eiId`, `eId`, `eAddress`, `eAge`, `eGender`, `eCoronaZone`, `eCoronaStatus`, `eDisease`, `eMedicines`, `eHealthCondition`, `eTravel`, `travelMode`, `eSmoking`, `eDrinking`, `ePregnant`, `createdAt`, `modifiedAt`) VALUES
-(4, 3, 'Karimnagar', 25, 'Male', 'Karimnagar', '-Ve', 'Yes', 'Yes', 'Good', 'No', 'Own', 'No', 'No', 'No', '2020-05-19 09:00:51', '2020-05-19 09:00:51');
+INSERT INTO `empinfo` (`eiId`, `eId`, `eImage`, `eAddress`, `eAge`, `eGender`, `eCoronaZone`, `eCoronaStatus`, `eDisease`, `eMedicines`, `eHealthCondition`, `eTravel`, `travelMode`, `eSmoking`, `eDrinking`, `ePregnant`, `createdAt`, `modifiedAt`) VALUES
+(25, 3, '21052020_3.jpg', 'Karimnagar', 25, 'Male', 'Karimnagar', '-Ve', 'Yes', 'Yes', 'Good', 'Yes', 'Own', 'No', 'No', 'No', '2020-05-21 16:23:58', '2020-05-21 16:23:58'),
+(26, 4, '22052020_4.jpg', 'karimnagar ', 31, 'Female', 'karimnagar', '-ve', 'Diabetes,Heart disease', 'Yes', 'No', 'Yes', 'Self', 'No', 'No', 'No', '2020-05-22 04:28:52', '2020-05-22 04:28:52'),
+(27, 7, '23052020_7.jpg', 'karimnagar  505001', 30, 'male', 'karimnagar', '-ve', 'Other', '', 'No', 'No', '', 'No', 'No', '', '2020-05-23 08:55:40', '2020-05-23 08:55:40');
 
 -- --------------------------------------------------------
 
@@ -174,7 +183,7 @@ CREATE TABLE `employees` (
   `eDesignation` varchar(50) NOT NULL,
   `eStatus` int(11) NOT NULL,
   `createdAt` datetime NOT NULL,
-  `modifiedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `modifiedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -182,7 +191,10 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`eId`, `cId`, `empId`, `eName`, `eMobile`, `eDesignation`, `eStatus`, `createdAt`, `modifiedAt`) VALUES
-(3, 2, 'vita123', 'swamy', '9490043228', 'engineer', 1, '2020-05-15 19:54:18', '2020-05-19 09:12:17');
+(3, 2, 'vita123', 'swamy akunoori', '9490043228', 'engineer', 1, '2020-05-15 19:54:18', '2020-05-21 16:23:58'),
+(4, 3, 'Coign123', 'Akhila', '9491473055', 'Developer', 1, '2020-05-19 06:17:39', '2020-05-22 04:28:52'),
+(7, 2, 'VITA1234', 'Vijay Kumar', '9963879607', 'Engineer', 1, '2020-05-23 05:04:01', '2020-05-23 08:55:40'),
+(8, 3, 'COIGN567', 'Vijay Kumar Jakkula', '9030662999', 'Engineer', 0, '2020-05-23 08:06:06', '2020-05-23 08:22:35');
 
 -- --------------------------------------------------------
 
@@ -193,12 +205,23 @@ INSERT INTO `employees` (`eId`, `cId`, `empId`, `eName`, `eMobile`, `eDesignatio
 CREATE TABLE `empstatus` (
   `esId` int(11) NOT NULL,
   `rId` int(11) NOT NULL,
+  `eId` int(11) NOT NULL,
+  `cId` int(11) NOT NULL,
   `hId` int(11) NOT NULL,
   `description` varchar(500) NOT NULL,
   `prescription` varchar(500) NOT NULL,
+  `uptoTablet` datetime NOT NULL,
   `createdAt` datetime NOT NULL,
-  `modifiedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `modifiedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `empstatus`
+--
+
+INSERT INTO `empstatus` (`esId`, `rId`, `eId`, `cId`, `hId`, `description`, `prescription`, `uptoTablet`, `createdAt`, `modifiedAt`) VALUES
+(1, 26, 3, 2, 8, 'take rest', 'paracetamal@saradon', '2020-05-29 10:37:09', '2020-05-22 10:37:09', '2020-05-22 13:59:09'),
+(2, 27, 3, 2, 8, 'health good', 'cough tablet', '2020-05-21 10:37:09', '2020-05-21 10:37:09', '2020-05-22 13:58:54');
 
 -- --------------------------------------------------------
 
@@ -215,7 +238,7 @@ CREATE TABLE `hospitals` (
   `hMobile` varchar(15) NOT NULL,
   `hStatus` int(11) NOT NULL,
   `createdAt` datetime NOT NULL,
-  `modifiedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `modifiedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -223,9 +246,9 @@ CREATE TABLE `hospitals` (
 --
 
 INSERT INTO `hospitals` (`hId`, `hUsername`, `hPassword`, `hName`, `hAddress`, `hMobile`, `hStatus`, `createdAt`, `modifiedAt`) VALUES
-(7, 'MEDIH1', '9874563215', 'Gandhi', 'HYD', '9874563211', 2, '2020-05-15 17:53:13', '2020-05-15 17:42:45'),
-(8, 'MEDIH2', '9876543212', 'Sunrise', 'KNR', '9876543212', 1, '2020-05-15 17:55:37', '2020-05-15 17:43:00'),
-(9, 'MEDIH3', '9876543213', 'KIMS', 'SEC', '9876543213', 1, '2020-05-15 17:56:28', '2020-05-15 16:08:46');
+(7, 'MEDIH1', '9874563215', 'Gandhi', 'HYD', '9874563211', 1, '2020-05-15 17:53:13', '2020-05-19 09:36:53'),
+(8, 'MEDIH2', '9876543212', 'Sunrise', 'KNR', '9876543212', 1, '2020-05-15 17:55:37', '2020-05-19 09:36:58'),
+(9, 'MEDIH3', '9876543213', 'KIMS', 'SEC', '9876543213', 1, '2020-05-15 17:56:28', '2020-05-19 09:36:20');
 
 -- --------------------------------------------------------
 
@@ -239,6 +262,25 @@ CREATE TABLE `super` (
   `password` varchar(20) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `symptoms`
+--
+
+CREATE TABLE `symptoms` (
+  `sId` int(11) NOT NULL,
+  `symptom` varchar(100) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `symptoms`
+--
+
+INSERT INTO `symptoms` (`sId`, `symptom`, `createdAt`) VALUES
+(2, 'Fever', '2020-05-22 07:06:49');
 
 --
 -- Indexes for dumped tables
@@ -299,6 +341,12 @@ ALTER TABLE `super`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `symptoms`
+--
+ALTER TABLE `symptoms`
+  ADD PRIMARY KEY (`sId`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -312,37 +360,37 @@ ALTER TABLE `companies`
 -- AUTO_INCREMENT for table `dailyquetions`
 --
 ALTER TABLE `dailyquetions`
-  MODIFY `qId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `qId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `dailyreport`
 --
 ALTER TABLE `dailyreport`
-  MODIFY `rId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `rId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `empfamily`
 --
 ALTER TABLE `empfamily`
-  MODIFY `efId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `efId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `empinfo`
 --
 ALTER TABLE `empinfo`
-  MODIFY `eiId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `eiId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `eId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `eId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `empstatus`
 --
 ALTER TABLE `empstatus`
-  MODIFY `esId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `esId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `hospitals`
@@ -355,6 +403,12 @@ ALTER TABLE `hospitals`
 --
 ALTER TABLE `super`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `symptoms`
+--
+ALTER TABLE `symptoms`
+  MODIFY `sId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

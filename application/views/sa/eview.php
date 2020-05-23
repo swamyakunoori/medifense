@@ -6,7 +6,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="courses-inner res-mg-b-30">
                     <div class="courses-title">
-                        <a href="#"><img src="<?php echo base_url(); ?>assets/img/courses/3.jpg" alt=""></a>
+                        <a href="#"><img src="<?php echo base_url(); ?>upload/<?= $row->eImage ?>" alt=""></a>
                         <h2 class="text-center"><?php echo $row->eName; ?></h2>
                     </div>
                     <div class="course-des">

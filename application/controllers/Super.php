@@ -10,9 +10,15 @@ class Super extends CI_Controller {
         }
 
 	public function index($page = 'dashboard'){
-                if(! file_exists('application/views/sa/'.$page.'.php')) {
-                        show_404();
-                }
+
+        if(!$this->session->userdata('sessionsuper')){
+                redirect('0/slogin');
+        }
+        
+        if(! file_exists('application/views/sa/'.$page.'.php')) {
+                show_404();
+        }
+
         $data['breadcometitle'] = $page;
         $data['title'] = "Super Admin";
 
@@ -295,15 +301,20 @@ class Super extends CI_Controller {
         }
 
         public function aadd(){
-                
+
+                $qAnswer = "";
+                $qa = count($this->input->post('qAnswer')) ;
+                for($i=0; $i<$qa; $i++){
+                        $qAnswer =  $qAnswer.$this->input->post('qAnswer')[$i]."@";
+                }
                 $formdata = array(
                         'qName' => $this->input->post('qName'),
-                        'qAnswer' => $this->input->post('qAnswer'),
+                        'qAnswer' => $qAnswer,
                         'qStatus' => 1,
                         'createdAt' => date('Y-m-d H:i:s'),
                         'modifiedAt' => date('Y-m-d H:i:s')
                 );
-                
+                $response_array['status'] = $qAnswer ;
 		$result = $this->sinsert->aadd($formdata);
 		if($result){
 			$response_array['status'] = '200';
@@ -333,6 +344,11 @@ class Super extends CI_Controller {
 		if($result){
 			redirect('1/aall');
 		}
+        }
+
+        function logout(){
+                $this->session->unset_userdata('sessionsuper');
+                redirect('0/slogin');
         }
 	
 }

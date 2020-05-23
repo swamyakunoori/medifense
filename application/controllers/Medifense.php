@@ -23,9 +23,7 @@ class Medifense extends CI_Controller {
 		);
 	
 		$result = $this->login->slogin($formdata);
-		foreach($result as $row){
-			$id = $row->id;
-		}
+		$this->session->set_userdata('sessionsuper',$result);
 		if($result){
 			$response_array['status'] = '200';
 		}
@@ -45,6 +43,7 @@ class Medifense extends CI_Controller {
 		);
 	
 		$result = $this->login->hlogin($formdata);
+		$this->session->set_userdata('sessionhospital',$result);
 		foreach($result as $row){
 			$hId = $row->hId;
 		}
@@ -67,6 +66,7 @@ class Medifense extends CI_Controller {
 		);
 	
 		$result = $this->login->clogin($formdata);
+		$this->session->set_userdata('sessioncompany',$result);
 		foreach($result as $row){
 			$cId = $row->cId;
 		}
